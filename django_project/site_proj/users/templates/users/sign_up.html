@@ -1,0 +1,49 @@
+{% extends "web_app/base.html" %}
+
+{% block content %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'users/style.css' %}">
+
+<div class="form-container">
+    {% if messages %}
+    <ul class="messages" style="text-align: center; font-size: small;">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <h2 style="font-size: 110%; padding-bottom: 20px">
+        Sign Up
+    </h2>
+    
+    <form method="post" action="{% url 'users:sign_up' %}" style="font-size: 85%;">
+        {% csrf_token %}
+        <div class="input-group grid-container" style="width: 100%;">
+            <label for="username">Username:</label>
+                {{ form.username }}
+            <span>{{ form.errors.username }}</span>
+        </div>
+        <div class="input-group grid-container" style="width: 100%;">
+            <label for="email">Email:</label>
+                {{ form.email }}
+            <span>{{ form.errors.email }}</span>
+        </div>
+        <div class="input-group grid-container" style="width: 100%;">
+            <label for="password1">Password:</label>
+                {{ form.password1 }}
+            <span>{{ form.errors.password1 }}</span>
+        </div>
+        <div class="input-group grid-container" style="width: 100%;">
+            <label for="password2">Password confirmation:</label>
+            {{ form.password2 }}
+            <span>{{ form.errors.password2 }}</span>
+        </div>
+        <div class="grid">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="reset" class="btn btn-primary">Reset</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

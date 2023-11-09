@@ -1,0 +1,42 @@
+{% extends "web_app/base.html" %}
+
+{% block content %}
+
+{% if messages %}
+<ul class="messages py-5 h-50">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+</ul>
+{% endif %}
+
+<form method="post" action="{% url 'web_app:add_quote' %}">
+    {% csrf_token %}
+    <div class="form-outline mb-4">
+        <input type="author" id="form4Example2" class="form-control" />
+        <label class="form-label">{{ form.new_author.label }}</label>
+        <span>{{ form.errors.new_author }}</span>
+    </div>
+
+    <!-- Message input -->
+    <div class="form-outline mb-4">
+        <textarea class="form-control" id="form4Example3" rows="4"></textarea>
+        <label class="form-label">{{ form.quote.label }}</label>
+        <span>{{ form.errors.quote }}</span>
+    </div>
+
+    <!-- Checkbox -->
+    <div class="form-outline mb-4" style="padding: 20px; width: 100%;">
+        <label for="Tags">Tags:</label>
+        <select name="tags">
+            {% for tag in tags %}
+            <option value="{{tag.name}}">{{tag.name}}</option>
+            {% endfor %}
+        </select>
+        <span>{{ quote_form.errors.tags }}</span>
+    </div>
+
+    <!-- Submit button -->
+    <button type="submit" class="btn btn-primary btn-block mb-4">Publish</button>
+    {% endblock %}
+</form>

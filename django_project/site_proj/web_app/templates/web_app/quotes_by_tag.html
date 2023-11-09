@@ -1,0 +1,35 @@
+{% extends "web_app/base.html" %}
+
+{% block content %}
+
+<div class="container text-left" style="font-size: 70%; color: white;">
+    <h1>
+        Tag: {{ tag_name }}
+    </h1>
+</div>
+<div class="row d-flex flex-column align-items-start flex-lg-row">
+    {% for quote in quotes %}
+    <div class="col col-lg-6 mb-4 mb-lg-0" style="color: white;">
+        <figure class="p-3 rounded" style="border-left: .25rem solid #a34e78;">
+            <blockquote class="blockquote pb-2" style="font-size: 90%;">
+                <p>
+                    {{ quote.quote }}
+                </p>
+            </blockquote>
+            <figcaption class="blockquote-footer font-italic" style="color: white;">
+                Author: 
+                <a style="color: aqua;" href="{% url 'web_app:author' quote.author.fullname %}">
+                    {{ quote.author.fullname }}
+                </a>
+            </figcaption>
+            <figcaption class="blockquote-footer font-italic" style="color: white;">
+                Tags: {% for tag in quote.tags.all %}
+                <a style="color:tomato ;" href="{% url 'web_app:quotes_by_tag' tag.name %}">
+                    {{ tag.name }}
+                </a>{% if not forloop.last %}, {% endif %}{% endfor %}
+            </figcaption>
+        </figure>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

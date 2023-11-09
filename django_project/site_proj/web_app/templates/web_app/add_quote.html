@@ -1,0 +1,41 @@
+{% extends "web_app/base.html" %}
+
+{% block content %}
+
+<div class="form-container">
+    <form method="POST" action="{% url 'web_app:add_quote' %}" class="form">
+        {% csrf_token %}
+        <div style="padding: 10px;">
+            <div class="row" style="display: flex; justify-content: space-between;">
+                <div style="flex: 1; color:white;">
+                    <label for="{{ form.new_author.id_for_label }}">Author name:</label>
+                    <textarea rows="1" id="{{ form.new_author.id_for_label }}" name="{{ form.new_author.name}}"
+                    style="resize: none; width: 100%; background-color: transparent; color: white;  border-radius: 5px;"></textarea>
+                </div>
+                <div style="flex: 1; color:white;">
+                    <label for="Tags">Tags:</label>
+                    <select name="tags" style="width: 100%; background-color: transparent; color: white;  border-radius: 5px;">
+                        {% for tag in tags %}
+                        <option value="{{tag.name}}">{{tag.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <span>{{ form.errors.new_author }}</span>
+
+        <div style="padding: 10px; color:white;">
+            <label for="{{ form.quote.id_for_label }}">Quote:</label>
+            <textarea id="{{ form.quote.id_for_label }}" name="{{ form.quote.name }}" rows="8"
+                style="resize: none; width: 100%; background-color: transparent; color: white;  border-radius: 5px;"></textarea>
+        </div>
+        <span>{{ form.errors.quote }}</span>
+
+        <div class="grid">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="reset" class="btn btn-primary">Reset</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

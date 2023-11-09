@@ -1,0 +1,38 @@
+body {
+    overflow: hidden;
+    color: white
+}
+
+.avatar-button {
+    width: 200px;
+    font-size: 12px
+}
+
+.labels {
+    font-size: 14px;
+    color: white
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.input-group input {
+    box-sizing: border-box;
+    color: white;
+    background-color: transparent;
+}
+
+.row.mt-3 input {
+    color: white;
+    background-color: transparent;
+}
+
+.input input {
+    color: white;
+    background-color: transparent;
+    border-radius: 5px;
+}

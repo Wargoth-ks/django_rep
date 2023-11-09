@@ -1,0 +1,46 @@
+{% extends "web_app/base.html" %}
+
+{% block content %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'users/style.css' %}">
+
+{% if messages %}
+<ul class="messages text-center">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+</ul>
+{% endif %}
+
+<div class="form-container">
+    <h2 style="font-size: 150%;">
+        Login
+    </h2>
+
+    <form method="post" action="{% url 'users:login' %}" class="form">
+        {% csrf_token %}
+        <div class="input-group">
+            <label for="username">Username:</label>
+            {{ form.username }}
+            <span>{{ form.errors.username }}</span>
+        </div>
+        <br>
+        <div class="input-group">
+            <label for="password">Password:</label>
+            {{ form.password }}
+            <span>{{ form.errors.password }}</span>
+        </div>
+        <p class="small"><a class="text-primary" href="{% url 'users:password_reset' %}">Forgot password?</a></p>
+        <div class="grid">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <p class="mb-0  text-center">Don't have an account?
+                <a href="{% url 'users:sign_up' %}" class="text-primary fw-bold">
+                    Sign Up
+                </a>
+            </p>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
